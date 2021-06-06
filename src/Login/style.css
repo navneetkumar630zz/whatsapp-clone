@@ -1,23 +1,23 @@
 .login {
-  display: grid;
-  place-items: center;
-  min-height: 100vh;
-}
-.login__container {
   width: min(30rem, 90vw);
   height: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  background-color: #fdfdfd;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 1px 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
 }
 .logo {
   width: 6rem;
 }
 .logo img {
   width: 100%;
+}
+.login h1 {
+  text-align: center;
 }
 .login button {
   padding: 1rem 2rem;

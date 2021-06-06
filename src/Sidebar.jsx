@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./Sidebar.css";
-import { Avatar, Button, IconButton } from "@material-ui/core";
+import { Avatar, Button, IconButton, Tooltip } from "@material-ui/core";
 import {
   Add,
   Chat,
-  DonutLarge,
+  ExitToApp,
   MoreVert,
   SearchOutlined,
 } from "@material-ui/icons";
 import { useStateValue } from "./StateProvider";
 import SidebarChat from "./SidebarChat";
-import db from "./firebase";
+import db, { auth } from "./firebase";
 
 function Sidebar() {
   const [{ user }, dispatch] = useStateValue();
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
-    const unsubscribe = db.collection("rooms").onSnapshot((snapshot) => {
+    const unsubscribe = db.collection("rooms").onSnapshot(snapshot => {
       setRooms(
-        snapshot.docs.map((doc) => ({
+        snapshot.docs.map(doc => ({
           id: doc.id,
           data: doc.data(),
         }))
@@ -47,9 +47,11 @@ function Sidebar() {
           <Avatar src={user?.photoURL} />
         </div>
         <div className='sidebar__header-options'>
-          <IconButton>
-            <DonutLarge />
-          </IconButton>
+          <Tooltip title='Logout'>
+            <IconButton onClick={() => auth.signOut()}>
+              <ExitToApp />
+            </IconButton>
+          </Tooltip>
           <IconButton>
             <Chat />
           </IconButton>
@@ -71,7 +73,7 @@ function Sidebar() {
           </Button>
         </div>
 
-        {rooms.map((room) => (
+        {rooms.map(room => (
           <SidebarChat key={room.id} id={room.id} name={room.data.name} />
         ))}
       </div>

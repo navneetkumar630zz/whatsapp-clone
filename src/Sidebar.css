@@ -1,5 +1,6 @@
 .Sidebar {
   flex: 0.35;
+  order: -1;
   display: flex;
   flex-direction: column;
 }
@@ -44,4 +45,10 @@
 .sidebar__chats::-webkit-scrollbar-thumb {
   background: lightgrey;
   border-radius: 1rem;
+}
+
+@media screen and (max-width: 700px) {
+  .Sidebar {
+    flex: auto;
+  }
 }

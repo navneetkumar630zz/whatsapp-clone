@@ -31,7 +31,7 @@ function Chat() {
       const unsubscribe = db
         .collection("rooms")
         .doc(roomId)
-        .onSnapshot((snapshot) => {
+        .onSnapshot(snapshot => {
           setRoomName(snapshot.data().name);
         });
 
@@ -40,8 +40,8 @@ function Chat() {
         .doc(roomId)
         .collection("messages")
         .orderBy("timestamp", "asc")
-        .onSnapshot((snapshot) =>
-          setMessages(snapshot.docs.map((doc) => doc.data()))
+        .onSnapshot(snapshot =>
+          setMessages(snapshot.docs.map(doc => doc.data()))
         );
 
       return () => {
@@ -51,7 +51,12 @@ function Chat() {
     }
   }, [roomId]);
 
-  const sendMessage = (e) => {
+  useEffect(() => {
+    const elem = document.querySelector(".chat__body");
+    elem.scrollTop = elem.scrollHeight;
+  }, [messages]);
+
+  const sendMessage = e => {
     e.preventDefault();
     if (!inputVal) return;
 
@@ -93,7 +98,7 @@ function Chat() {
         </div>
       </div>
       <div className='chat__body'>
-        {messages.map((message) => (
+        {messages.map(message => (
           <div
             key={message.id}
             className={`chat__message ${
@@ -111,20 +116,20 @@ function Chat() {
         ))}
       </div>
       <div className='chat__footer'>
-        <IconButton>
+        <IconButton className='chat__emoji-icon'>
           <InsertEmoticon />
         </IconButton>
         <form onSubmit={sendMessage}>
           <input
             type='text'
             value={inputVal}
-            onChange={(e) => setInputVal(e.target.value)}
+            onChange={e => setInputVal(e.target.value)}
             placeholder='Type a message'
           />
           <IconButton type='submit'>
             <Send />
           </IconButton>
-          <IconButton>
+          <IconButton className='chat__mic-icon'>
             <Mic />
           </IconButton>
         </form>

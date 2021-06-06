@@ -25,12 +25,24 @@
   padding: 2rem;
   overflow: auto;
 }
+.chat__body::-webkit-scrollbar {
+  width: 0.4rem;
+}
+.chat__body::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+}
+.chat__body::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
 .chat__message {
+  font-size: 0.9rem;
   background-color: #fff;
   border-radius: 6px;
-  padding: 0.2rem 0.5rem;
-  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
   width: fit-content;
+  max-width: 80%;
   position: relative;
 }
 .chat__message--reciever {
@@ -70,4 +82,19 @@
   flex: 1;
   padding: 0 1rem;
   margin: 0.3rem 1rem;
+}
+
+@media screen and (max-width: 700px) {
+  .Chat {
+    flex: auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .chat__emoji-icon,
+  .chat__mic-icon,
+  .chat__header-info span,
+  .chat__header-options {
+    display: none !important;
+  }
 }

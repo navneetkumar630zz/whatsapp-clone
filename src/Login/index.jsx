@@ -9,29 +9,25 @@ function Login() {
   const signIn = () => {
     auth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then(result => {
         dispatch({
           type: actionTypes.SET_USER,
           user: result.user,
         });
       })
-      .catch((err) => alert(err.message));
+      .catch(err => alert(err.message));
   };
 
   return (
-    <div>
-      <div className='login'>
-        <div className='login__container'>
-          <div className='logo'>
-            <img
-              src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/150px-WhatsApp.svg.png'
-              alt='whatsapp logo'
-            />
-          </div>
-          <h1>Sign in to Whatsapp</h1>
-          <button onClick={signIn}>Sign in with Google</button>
-        </div>
+    <div className='login'>
+      <div className='logo'>
+        <img
+          src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/150px-WhatsApp.svg.png'
+          alt='whatsapp logo'
+        />
       </div>
+      <h1>Sign in to Whatsapp</h1>
+      <button onClick={signIn}>Sign in with Google</button>
     </div>
   );
 }
