@@ -1,0 +1,17 @@
+.SidebarChat {
+  display: flex;
+  padding: 1rem;
+  border-bottom: 1px solid var(--background);
+  cursor: pointer;
+  transition: background 0.15s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.SidebarChat:hover {
+  background-color: var(--background);
+}
+.sidebarChat__info {
+  flex-grow: 1;
+  margin-left: 0.8rem;
+}
+.sidebarChat__info span {
+  color: var(--grey);
+}

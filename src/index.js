@@ -1,16 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { StateProvder } from "./StateProvider";
+import { StateProvider } from "./StateProvider";
 import reducer, { initialState } from "./reducer";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      dark: "#128c7e",
+      main: "#25d366",
+      light: "#dcf8c6",
+    },
+    secondary: {
+      main: "#34b7f1",
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <StateProvder initialState={initialState} reducer={reducer}>
-      <App />
-    </StateProvder>
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </StateProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

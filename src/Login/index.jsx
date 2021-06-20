@@ -1,19 +1,19 @@
-import { auth, provider } from "../firebase";
-import { useStateValue } from "../StateProvider";
-import { actionTypes } from "../reducer";
+import db, { auth, provider } from "../firebase";
 import "./style.css";
 
 function Login() {
-  const [{}, dispatch] = useStateValue();
-
   const signIn = () => {
     auth
       .signInWithPopup(provider)
       .then(result => {
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
-        });
+        db.collection("users").doc(result.user.uid).set(
+          {
+            name: result.user.displayName,
+            email: result.user.email,
+            photo: result.user.photoURL,
+          },
+          { merge: true }
+        );
       })
       .catch(err => alert(err.message));
   };

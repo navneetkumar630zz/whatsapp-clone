@@ -1,0 +1,29 @@
+.message {
+  width: 80%;
+  max-width: max-content;
+  margin-bottom: 0.5rem;
+}
+.message--reciever {
+  margin-left: auto;
+}
+.message__name {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.message--reciever .message__name {
+  display: none;
+}
+.message__body {
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.5rem;
+}
+.message--reciever .message__body {
+  background-color: var(--primary-light);
+}
+.message__timestamp {
+  font-size: 0.7rem;
+  margin-left: 1rem;
+  color: var(--dark-grey);
+}

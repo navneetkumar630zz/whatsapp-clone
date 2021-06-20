@@ -1,32 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Chat from "./Chat";
-import { auth } from "./firebase";
+import db, { auth } from "./firebase";
+import { actionTypes } from "./reducer";
+import Loader from "./Loader";
 import Login from "./Login";
 import Sidebar from "./Sidebar";
 import { useStateValue } from "./StateProvider";
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
       if (authUser) {
         // the user just logged in or was logged in
-        dispatch({
-          type: "SET_USER",
-          user: authUser,
-        });
+        db.collection("users")
+          .doc(authUser.uid)
+          .get()
+          .then(snapshot => {
+            dispatch({
+              type: actionTypes.SET_USER,
+              user: { id: snapshot.id, ...snapshot.data() },
+            });
+            setLoading(false);
+          });
       } else {
         // the user is logged out
         dispatch({
-          type: "SET_USER",
+          type: actionTypes.SET_USER,
           user: null,
         });
+        setLoading(false);
       }
     });
   }, []);
+
+  if (loading) return <Loader />;
 
   return (
     <div className='App'>

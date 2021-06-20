@@ -10,7 +10,7 @@ h3 {
 }
 
 .app__body {
-  background-color: #ededed;
+  background-color: var(--background);
   width: 80vw;
   height: 95vh;
   display: flex;

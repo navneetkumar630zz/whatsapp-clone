@@ -8,16 +8,16 @@
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  border-right: 2px solid lightgrey;
+  border-right: 2px solid var(--light-grey);
 }
 .sidebar__search {
   padding: 0.8rem;
-  background-color: whitesmoke;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .sidebar__searchbar-container {
   display: flex;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 2rem;
   padding: 0.4rem;
 }
@@ -28,7 +28,7 @@
   margin-left: 0.2rem;
 }
 .sidebar__searchbar-container .MuiSvgIcon-root {
-  color: grey;
+  color: var(--dark-grey);
 }
 .sidebar__add-room {
   text-align: right;
@@ -36,19 +36,26 @@
 }
 .sidebar__chats {
   flex: 1;
-  background-color: #fff;
+  background-color: var(--white);
   overflow: auto;
 }
 .sidebar__chats::-webkit-scrollbar {
   width: 0.4rem;
 }
 .sidebar__chats::-webkit-scrollbar-thumb {
-  background: lightgrey;
+  background: var(--light-grey);
   border-radius: 1rem;
 }
 
 @media screen and (max-width: 700px) {
   .Sidebar {
     flex: auto;
+    background-color: var(--primary-dark);
+  }
+  .sidebar__header {
+    border: none;
+  }
+  .sidebar__header .MuiSvgIcon-root {
+    color: var(--white);
   }
 }

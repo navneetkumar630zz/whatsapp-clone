@@ -1,0 +1,14 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.loader__container {
+  text-align: center;
+}
+.loader__logo img {
+  width: 10rem;
+  max-width: 40vw;
+  margin-bottom: 3rem;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
-import "./Chat.css";
+import "./style.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import {
   AttachFile,
@@ -11,8 +11,9 @@ import {
   Send,
 } from "@material-ui/icons";
 import { useParams } from "react-router-dom";
-import { useStateValue } from "./StateProvider";
-import db from "./firebase";
+import { useStateValue } from "../StateProvider";
+import db from "../firebase";
+import Message from "./Message";
 
 function Chat() {
   const [inputVal, setInputVal] = useState("");
@@ -20,7 +21,7 @@ function Chat() {
   const [roomName, setRoomName] = useState("");
   const [messages, setMessages] = useState([]);
   const { roomId } = useParams();
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
 
   useEffect(() => {
     setSeed(Math.floor(Math.random() * 1000));
@@ -32,7 +33,7 @@ function Chat() {
         .collection("rooms")
         .doc(roomId)
         .onSnapshot(snapshot => {
-          setRoomName(snapshot.data().name);
+          setRoomName(snapshot.data()?.name);
         });
 
       const unsubscribeMess = db
@@ -62,12 +63,13 @@ function Chat() {
 
     db.collection("rooms").doc(roomId).collection("messages").add({
       email: user.email,
-      name: user.displayName,
+      name: user.name,
       message: inputVal,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
     setInputVal("");
+    document.getElementById("message-input").focus();
   };
 
   return (
@@ -99,20 +101,13 @@ function Chat() {
       </div>
       <div className='chat__body'>
         {messages.map(message => (
-          <div
+          <Message
             key={message.id}
-            className={`chat__message ${
-              message.email === user.email
-                ? "chat__message--reciever"
-                : undefined
-            }`}
-          >
-            <span className='chat__message-name'>{message.name}</span>
-            {message.message}
-            <span className='chat__message-timestamp'>
-              {message.timestamp?.toDate().toLocaleString()}
-            </span>
-          </div>
+            name={message.name}
+            message={message.message}
+            timestamp={message.timestamp?.toDate().toLocaleString()}
+            isReciever={message.email === user.email}
+          />
         ))}
       </div>
       <div className='chat__footer'>
@@ -122,11 +117,13 @@ function Chat() {
         <form onSubmit={sendMessage}>
           <input
             type='text'
+            id='message-input'
             value={inputVal}
             onChange={e => setInputVal(e.target.value)}
             placeholder='Type a message'
+            autoComplete='off'
           />
-          <IconButton type='submit'>
+          <IconButton type='submit' disabled={!inputVal}>
             <Send />
           </IconButton>
           <IconButton className='chat__mic-icon'>
