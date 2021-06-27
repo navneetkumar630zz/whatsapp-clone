@@ -1,10 +1,18 @@
+.message__wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+.message--reciever {
+  margin-left: auto;
+  flex-direction: row-reverse;
+}
 .message {
   width: 80%;
   max-width: max-content;
   margin-bottom: 0.5rem;
 }
-.message--reciever {
-  margin-left: auto;
+.message--selected {
+  filter: brightness(0.9);
 }
 .message__name {
   font-size: 0.7rem;

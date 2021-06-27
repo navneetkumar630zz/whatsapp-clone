@@ -25,6 +25,10 @@
   padding: 2rem;
   overflow: auto;
 }
+.chat__body.type-chat .message__name {
+  display: none;
+}
+
 .chat__body::-webkit-scrollbar {
   width: 0.4rem;
 }
@@ -64,9 +68,11 @@
 @media screen and (max-width: 500px) {
   .chat__emoji-icon,
   .chat__mic-icon,
-  .chat__header-info span,
-  .chat__header-options {
+  .chat__header-info span {
     display: none !important;
+  }
+  .chat__header {
+    padding: 0.3rem;
   }
   .chat__body {
     padding: 1rem;

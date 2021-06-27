@@ -20,9 +20,10 @@
   text-align: center;
 }
 .login button {
-  padding: 1rem 2rem;
-  color: #fff;
-  background-color: #0a8d48;
-  border-radius: 5px;
-  font: inherit;
+  padding: 12px 1.5rem;
+  color: var(--white);
+  background-color: var(--primary);
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 1.1rem;
 }
